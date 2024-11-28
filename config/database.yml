@@ -8,7 +8,7 @@ development:
   username: root
   password:
   host: localhost
-  database: Q-Bridge_development
+  database: Q_Bridge_development
 
 test:
   <<: *default
@@ -16,7 +16,7 @@ test:
   username: root
   password:
   host: localhost
-  database: Q-Bridge_test
+  database: Q_Bridge_test
 
 production:
   <<: *default

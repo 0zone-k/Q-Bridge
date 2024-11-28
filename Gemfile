@@ -74,3 +74,9 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'devise'
+
+gem 'sassc'
+
+gem 'active_hash'
