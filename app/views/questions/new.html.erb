@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>質問一覧 - Q-Bridge</title>
+  <title>質問投稿 - Q-Bridge</title>
   <style>
       body {
           font-family: 'Arial', sans-serif;
@@ -39,47 +39,58 @@
           color: white;
       }
       .container {
-          max-width: 800px;
+          max-width: 500px;
           margin: 50px auto;
           padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-      .question {
-          margin-bottom: 20px;
-          padding: 15px;
-          border: 1px solid #0056b3;
+      .form-group {
+          margin-bottom: 15px;
+      }
+      label {
+          display: block;
+          margin-bottom: 5px;
+      }
+      input[type="text"],textarea {
+          width: 95%;
+          padding: 10px;
+          border: 1px solid #ccc;
           border-radius: 5px;
-          background-color: #f0f8ff;
-          transition: transform 0.3s;
+          transition: border-color 0.3s;
       }
-      .question:hover {
-          transform: scale(1.02);
-      }
-      h3 {
-          margin: 0;
-      }
-      .details {
-          font-size: 0.9em;
-          color: #666;
+      input:focus {
+          border-color: #0056b3;
       }
 
-      .fixed-button {
-          width: 100px;
-          height: 100px;
-          position: fixed;
-          bottom: 50px;
-          right: 50px;
+      .category-select,.affilaton-select {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          transition: border-color 0.3s;
+      }
+
+      .deadline {
+          width: 95%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          transition: border-color 0.3s;
+      }
+      button {
+          width: 100%;
+          padding: 10px;
           background-color: #0056b3;
           color: white;
           border: none;
-          padding: 15px 20px;
-          border-radius: 50px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          border-radius: 5px;
           cursor: pointer;
           transition: background-color 0.3s;
       }
-      .fixed-button:hover {
+      button:hover {
           background-color: #004494;
       }
   </style>
@@ -100,20 +111,32 @@
 </header>
 
 <div class="container">
-  <h2>質問一覧</h2>
+  <h2>質問投稿</h2>
 
-  <% @questions.each do |question| %>
-<div class = "question">
-  <h3><%= question.title %></h3>
-  <p class="details">To:<%= Affilation.find(question.affilation_id).name %> | 回答期限: <%= question.deadline %></p>
-  <p><%= question.content %></p>
-  <%= User.find(question.user_id).last_name %> <%= User.find(question.user_id).first_name %>
+  <%= form_with model: @question, url: "/questions", method: :post, local: true do |f| %>
+  <div class="form-group">
+      <%= f.label :タイトル%>
+      <%= f.text_field :title, id:"title", placeholder:"タイトルを入力" %>
   </div>
+    <div class="form-group">
+      <%= f.label :カテゴリー %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"category-select"}) %>
+  </div>
+  <div class="form-group">
+      <%= f.label :質問内容 %>
+      <%= f.text_area :content, id:"content", placeholder:"質問の詳細を入力" %>
+  </div>
+  <div class="form-group">
+      <%= f.label :担当部署 %>
+      <%= f.collection_select(:affilation_id, Affilation.all, :id, :name, {}, {class:"affilaton-select"}) %>
+  </div>
+  <div class="form-group">
+      <%= f.label :回答期限 %>
+      <%= f.datetime_local_field :deadline, id: "deadline", class: "deadline" %>
+  </div>
+  <button>投稿</button>
 </div>
 <% end %>
-</div>
-<%= link_to  new_question_path, class: 'purchase-btn' do %>
-<button class="fixed-button">質問投稿</button>
-<% end %>
+
 </body>
 </html>
