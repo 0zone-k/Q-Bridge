@@ -89,10 +89,36 @@
           border-radius: 5px;
           cursor: pointer;
           transition: background-color 0.3s;
+          margin-bottom: 10px;
       }
       button:hover {
           background-color: #004494;
       }
+      .bottom-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+}
+.return{
+  width: 100%;
+  padding: 10px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+
+}
   </style>
 </head>
 <body>
@@ -111,9 +137,9 @@
 </header>
 
 <div class="container">
-  <h2>質問投稿</h2>
+  <h2>質問編集</h2>
 
-  <%= form_with model: @question, url: "/questions", method: :post, local: true do |f| %>
+  <%= form_with model: @question, local: true do |f| %>
   <div class="form-group">
       <%= f.label :タイトル%>
       <%= f.text_field :title, id:"title", placeholder:"タイトルを入力" %>
@@ -126,7 +152,7 @@
       <%= f.label :質問内容 %>
       <%= f.text_area :content, id:"content", placeholder:"質問の詳細を入力" %>
   </div>
-  <div class="form-group">
+    <div class="form-group">
      <p>クリックしてファイルをアップロード(任意)</p>
         <%= f.file_field :image, id:"item-image" %>
   </div>
@@ -138,8 +164,13 @@
       <%= f.label :回答期限 %>
       <%= f.datetime_local_field :deadline, id: "deadline", class: "deadline" %>
   </div>
-  <button>投稿</button>
-</div>
+
+  <%= f.submit "更新する", class:"bottom-button"%>
+  <button>戻る</button>
+  <div class= "return" >
+  <%=# link_to '戻る', question_path, class: "bottom-button" %>
+  </div>
+  </div>
 <% end %>
 
 </body>

@@ -24,4 +24,8 @@ class User < ApplicationRecord
          extend ActiveHash::Associations::ActiveRecordExtensions
          belongs_to :affilation
 
+
+         has_many :questions
+         has_many :answers
+
 end
