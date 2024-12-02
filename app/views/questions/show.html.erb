@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>質問一覧 - Q-Bridge</title>
+  <title>質問詳細 - Q-Bridge</title>
   <style>
       body {
           font-family: 'Arial', sans-serif;
@@ -44,32 +44,33 @@
           padding: 20px;
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          border-radius: 10px;
       }
-      .question {
-          margin-bottom: 20px;
-          padding: 15px;
-          border: 1px solid #0056b3;
-          border-radius: 5px;
-          background-color: #f0f8ff;
-          transition: transform 0.3s;
-      }
-      .question:hover {
-          transform: scale(1.02);
-      }
-      h3 {
+      h2 {
           margin: 0;
       }
       .details {
           font-size: 0.9em;
           color: #666;
       }
-
+      .content {
+          margin-top: 20px;
+          padding: 15px;
+          border: 1px solid #0056b3;
+          border-radius: 5px;
+          background-color: #f0f8ff;
+      }
+      .questioner-info {
+          margin-top: 10px;
+          font-size: 0.9em;
+          color: #333;
+          text-align: right;
+      }
+      /* 固定ボタンスタイル */
       .fixed-button {
-          width: 100px;
-          height: 100px;
           position: fixed;
-          bottom: 50px;
-          right: 50px;
+          bottom: 20px;
+          right: 20px;
           background-color: #0056b3;
           color: white;
           border: none;
@@ -82,12 +83,44 @@
       .fixed-button:hover {
           background-color: #004494;
       }
+      .answer-button {
+          margin-top: 50px;
+          padding: 10px 15px;
+          background-color: #28a745;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+      .answer-button:hover {
+          background-color: #218838;
+      }
+
+      .image-box{
+        max-width: 100%;
+        height: auto;
+        display: block;
+ 
+      }
+      .image-box-item{
+        margin-top: 20px;
+          padding: 15px;
+          border: 1px solid #0056b3;
+          border-radius: 5px;
+          background-color: #f0f8ff;
+         object-fit: contain;
+      }
+      .btn{
+        margin-top: 20px;
+      }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Q-Bridge</h1>
+  <%= link_to "Q-Bridge" ,root_path, class: 'main-title' %>
   <div>
     <% if user_signed_in? %>
       <%= link_to current_user.last_name + ' ' + current_user.first_name ,"/users/#{current_user.id}",class: "button"%>
@@ -99,24 +132,45 @@
   </div>
 </header>
 
+<%= form_with model: @question , local: true do |f|%>
+
 <div class="container">
-  <h2>質問一覧</h2>
-
-  <% @questions.each do |question| %>
-  <%= link_to question_path(question) do %>
-<div class = "question">
-  <h3><%= question.title %></h3>
-  <p class="details">To:<%= Affilation.find(question.affilation_id).name %> | 回答期限: <%= question.deadline %></p>
-  <p><%= question.content %></p>
-  <%= User.find(question.user_id).last_name %> <%= User.find(question.user_id).first_name %>
+  <h2><%= @question.title %></h2>
+  <p class="details">To: <%= Affilation.find(@question.affilation_id).name %> | 回答期限: <%= @question.deadline %></p>
+  
+  <div class="content">
+      <h3>質問内容</h3>
+      <p><%= @question.content %></p>
   </div>
-    <% end %>
-<% end %>
+  
+  <% if @question.image.attached?%>
+<div class = "image-box-item">
+  <%= image_tag @question.image, class: "image-box" %>
 </div>
+<% else %>
+<% end %>
+
+<div class="questioner-info">
+      <p><%= User.find(@question.user_id).inner_line %> | <%= User.find(@question.user_id).last_name %> <%= User.find(@question.user_id).first_name %></p>
+  </div>
+
+<div class = "btn">
+  <% if current_user.present? && current_user.id == @question.user_id %>
+   <%= link_to "編集する", edit_question_path ,method: :get , class:"answer-button" %>
+   <%= link_to "削除する", question_path ,data: {turbo_method: :delete} , class:"answer-button" %>
+ <% else %>
+    <button class="answer-button">回答する</button>
+    <% end %>
+
+    <% end %>
+</div>
+  <h3>回答一覧</h3>
+  <ul>
+      <li>回答内容1</li>
+      <li>回答内容2</li>
+  </ul>
+
 </div>
 
-<%= link_to  new_question_path, class: 'purchase-btn' do %>
-<button class="fixed-button">質問投稿</button>
-<% end %>
 </body>
 </html>
