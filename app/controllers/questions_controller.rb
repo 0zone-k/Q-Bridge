@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-
+  before_action :set_question, only: [:edit, :update, :show, :destroy]
   def index
     @questions = Question.all
   end
@@ -23,11 +23,12 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    @question = Question.find(params[:id])
   end
 
   def update
     if @question.update(question_params)
-      redirect_to :show
+      redirect_to question_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,6 +46,10 @@ class QuestionsController < ApplicationController
   private
   def question_params
     params.require(:question).permit(:title, :category_id, :content, :affilation_id, :deadline, :image).merge(user_id: current_user.id)
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
   end
 end
 

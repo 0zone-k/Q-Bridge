@@ -124,54 +124,51 @@
 <body>
 
 <header>
-  <h1>Q-Bridge</h1>
-  <div>
-    <% if user_signed_in? %>
-      <%= link_to current_user.last_name + ' ' + current_user.first_name ,'#',class: "button"%>
-      <%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete} ,class: "button"%>
+    <h1>Q-Bridge</h1>
+    <div>
+      <% if user_signed_in? %>
+        <%= link_to current_user.last_name + ' ' + current_user.first_name, '#', class: "button" %>
+        <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "button" %>
       <% else %>
-      <%= link_to 'ログイン', new_user_session_path ,class: "button"%>
-      <%= link_to '新規登録' ,new_user_registration_path ,class: "button"%>
+        <%= link_to 'ログイン', new_user_session_path, class: "button" %>
+        <%= link_to '新規登録', new_user_registration_path, class: "button" %>
       <% end %>
-  </div>
-</header>
+    </div>
+  </header>
+  <div class="container">
+    <h2>質問編集</h2>
+    <%= form_with model: @question, local: true do |f| %>
 
-<div class="container">
-  <h2>質問編集</h2>
-
-  <%= form_with model: @question, local: true do |f| %>
-  <div class="form-group">
-      <%= f.label :タイトル%>
-      <%= f.text_field :title, id:"title", placeholder:"タイトルを入力" %>
+        <%= render 'shared/error_messages', model: f.object %>
+      <div class="form-group">
+        <%= f.label :タイトル %>
+        <%= f.text_field :title, id: "title", placeholder: "タイトルを入力" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :カテゴリー %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, { class: "category-select" }) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :質問内容 %>
+        <%= f.text_area :content, id: "content", placeholder: "質問の詳細を入力" %>
+      </div>
+      <div class="form-group">
+        <p>クリックしてファイルをアップロード(任意)</p>
+        <%= f.file_field :image, id: "item-image" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :担当部署 %>
+        <%= f.collection_select(:affilation_id, Affilation.all, :id, :name, {}, { class: "affilaton-select" }) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :回答期限 %>
+        <%= f.datetime_local_field :deadline, id: "deadline", class: "deadline" %>
+      </div>
+      <%= f.submit "更新する", class: "bottom-button" %>
+      <div class="return">
+        <%= link_to '戻る', question_path(@question), class: "bottom-button" %>
+      </div>
+    <% end %>
   </div>
-    <div class="form-group">
-      <%= f.label :カテゴリー %>
-      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"category-select"}) %>
-  </div>
-  <div class="form-group">
-      <%= f.label :質問内容 %>
-      <%= f.text_area :content, id:"content", placeholder:"質問の詳細を入力" %>
-  </div>
-    <div class="form-group">
-     <p>クリックしてファイルをアップロード(任意)</p>
-        <%= f.file_field :image, id:"item-image" %>
-  </div>
-  <div class="form-group">
-      <%= f.label :担当部署 %>
-      <%= f.collection_select(:affilation_id, Affilation.all, :id, :name, {}, {class:"affilaton-select"}) %>
-  </div>
-  <div class="form-group">
-      <%= f.label :回答期限 %>
-      <%= f.datetime_local_field :deadline, id: "deadline", class: "deadline" %>
-  </div>
-
-  <%= f.submit "更新する", class:"bottom-button"%>
-  <button>戻る</button>
-  <div class= "return" >
-  <%=# link_to '戻る', question_path, class: "bottom-button" %>
-  </div>
-  </div>
-<% end %>
-
 </body>
 </html>

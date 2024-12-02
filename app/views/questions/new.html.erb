@@ -114,6 +114,7 @@
   <h2>質問投稿</h2>
 
   <%= form_with model: @question, url: "/questions", method: :post, local: true do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
   <div class="form-group">
       <%= f.label :タイトル%>
       <%= f.text_field :title, id:"title", placeholder:"タイトルを入力" %>
