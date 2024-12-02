@@ -58,6 +58,20 @@
           padding: 10px;
           border-radius: 5px;
       }
+      .image-box{
+        max-width: 100%;
+        height: auto;
+        display: block;
+ 
+      }
+      .image-box-item{
+        margin-top: 20px;
+          padding: 15px;
+          border: 1px solid #0056b3;
+          border-radius: 5px;
+          background-color: #f0f8ff;
+         object-fit: contain;
+      }
   </style>
 </head>
 <body>
@@ -86,7 +100,7 @@
   <h3>過去の質問一覧</h3>
   <% @questions.each do |question| %>
     <ul>
-      <li><%= link_to question.title, question_path(question.id) %></li>
+      <li><%= link_to question, question_path(question.id) %></li>
     </ul>
   <% end %>
   

@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @answers = @question.answers
   end
 
   def edit
@@ -50,6 +51,9 @@ class QuestionsController < ApplicationController
 
   def set_question
     @question = Question.find(params[:id])
+  end
+  def answer_params
+    params.require(:answer).permit(:answer).merge(user_id: current_user.id)
   end
 end
 
