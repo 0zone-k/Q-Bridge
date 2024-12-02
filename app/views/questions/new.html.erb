@@ -99,9 +99,10 @@
 
 <header>
   <h1>Q-Bridge</h1>
+  <%= link_to "Q-Bridge" ,root_path, class: 'main-title' %>
   <div>
     <% if user_signed_in? %>
-      <%= link_to current_user.last_name + ' ' + current_user.first_name ,'#',class: "button"%>
+      <%= link_to current_user.last_name + ' ' + current_user.first_name ,"/users/#{current_user.id}",class: "button"%>
       <%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete} ,class: "button"%>
       <% else %>
       <%= link_to 'ログイン', new_user_session_path ,class: "button"%>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>質問一覧 - Q-Bridge</title>
+  <title>マイページ - Q-Bridge</title>
   <style>
       body {
           font-family: 'Arial', sans-serif;
@@ -45,42 +45,18 @@
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-      .question {
-          margin-bottom: 20px;
-          padding: 15px;
-          border: 1px solid #0056b3;
-          border-radius: 5px;
-          background-color: #f0f8ff;
-          transition: transform 0.3s;
-      }
-      .question:hover {
-          transform: scale(1.02);
-      }
       h3 {
           margin: 0;
       }
-      .details {
-          font-size: 0.9em;
-          color: #666;
+      ul {
+          list-style-type: none;
+          padding: 0;
       }
-
-      .fixed-button {
-          width: 100px;
-          height: 100px;
-          position: fixed;
-          bottom: 50px;
-          right: 50px;
-          background-color: #0056b3;
-          color: white;
-          border: none;
-          padding: 15px 20px;
-          border-radius: 50px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          cursor: pointer;
-          transition: background-color 0.3s;
-      }
-      .fixed-button:hover {
-          background-color: #004494;
+      li {
+          background-color: #f0f8ff;
+          margin: 10px 0;
+          padding: 10px;
+          border-radius: 5px;
       }
   </style>
 </head>
@@ -88,6 +64,7 @@
 
 <header>
   <h1>Q-Bridge</h1>
+  <%= link_to "Q-Bridge" ,root_path, class: 'main-title' %>
   <div>
     <% if user_signed_in? %>
       <%= link_to current_user.last_name + ' ' + current_user.first_name ,"/users/#{current_user.id}",class: "button"%>
@@ -100,23 +77,25 @@
 </header>
 
 <div class="container">
-  <h2>質問一覧</h2>
-
+  <h2>マイページ</h2>
+  <p>名前: <span id="my-name"><%= @user.last_name %> <%= @user.first_name %></span></p>
+  <p>所属: <span id="my-name"><%= Affilation.find(@user.affilation_id).name %></span></p>
+  <p>メールアドレス: <span id="my-email"><%= @user.email %></span></p>
+  <p>内線番号: <span id="my-extension"><%= @user.inner_line %></span></p>
+  
+  <h3>過去の質問一覧</h3>
   <% @questions.each do |question| %>
-  <%= link_to question_path(question) do %>
-<div class = "question">
-  <h3><%= question.title %></h3>
-  <p class="details">To:<%= Affilation.find(question.affilation_id).name %> | 回答期限: <%= question.deadline %></p>
-  <p><%= question.content %></p>
-  <%= User.find(question.user_id).last_name %> <%= User.find(question.user_id).first_name %>
-  </div>
-    <% end %>
-<% end %>
-</div>
+    <ul>
+      <li><%= link_to question.title, question_path(question.id) %></li>
+    </ul>
+  <% end %>
+  
+  <h3>過去の回答一覧</h3>
+  <ul>
+      <li>回答内容1</li>
+      <li>回答内容2</li>
+  </ul>
 </div>
 
-<%= link_to  new_question_path, class: 'purchase-btn' do %>
-<button class="fixed-button">質問投稿</button>
-<% end %>
 </body>
 </html>
