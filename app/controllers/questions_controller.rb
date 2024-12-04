@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:edit, :update, :show, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :set_question, only: [:edit, :show, :update, :destroy]
   def index
     @questions = Question.all
   end
@@ -52,8 +53,10 @@ class QuestionsController < ApplicationController
   def set_question
     @question = Question.find(params[:id])
   end
+
   def answer_params
     params.require(:answer).permit(:answer).merge(user_id: current_user.id)
   end
+
 end
 

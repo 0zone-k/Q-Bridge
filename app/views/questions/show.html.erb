@@ -1,96 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>質問詳細 - Q-Bridge</title>
-  <style>
-      body {
-          font-family: 'Arial', sans-serif;
-          background-color: #e6f7ff;
-          color: #333;
-          margin: 0;
-          padding: 0;
-      }
-      .container {
-          max-width: 600px;
-          margin: 50px auto;
-          padding: 20px;
-          background-color: white;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          border-radius: 10px;
-      }
-      h2 {
-          margin: 0;
-      }
-      .details {
-          font-size: 0.9em;
-          color: #666;
-      }
-      .content {
-          margin-top: 20px;
-          padding: 15px;
-          border: 1px solid #0056b3;
-          border-radius: 5px;
-          background-color: #f0f8ff;
-      }
-      .questioner-info {
-          margin-top: 10px;
-          font-size: 0.9em;
-          color: #333;
-          text-align: right;
-      }
-      /* 固定ボタンスタイル */
-      .fixed-button {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          background-color: #0056b3;
-          color: white;
-          border: none;
-          padding: 15px 20px;
-          border-radius: 50px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          cursor: pointer;
-          transition: background-color 0.3s;
-      }
-      .fixed-button:hover {
-          background-color: #004494;
-      }
-      .answer-button {
-          margin-top: 50px;
-          padding: 10px 15px;
-          background-color: #28a745;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-      }
-      .answer-button:hover {
-          background-color: #218838;
-      }
-
-      .image-box{
-        max-width: 100%;
-        height: auto;
-        display: block;
- 
-      }
-      .image-box-item{
-        margin-top: 20px;
-          padding: 15px;
-          border: 1px solid #0056b3;
-          border-radius: 5px;
-          background-color: #f0f8ff;
-         object-fit: contain;
-      }
-      .btn{
-        margin-top: 20px;
-      }
-  </style>
-</head>
-<body>
 <%= render "shared/header" %>
 
 <%= form_with model: @question , local: true do |f|%>
@@ -117,10 +24,19 @@ To: <%= Affilation.find(@question.affilation_id).name %> | 回答期限: <%= @qu
 
 <div class = "btn">
   <% if current_user.present? && current_user.id == @question.user_id %>
+  <div class = "ex-button">
    <%= link_to "編集する", edit_question_path ,method: :get , class:"answer-button" %>
+  </div>
+  <div class = "ex-button">
    <%= link_to "削除する", question_path ,data: {turbo_method: :delete} , class:"answer-button" %>
+  </div>
  <% else %>
+  <% if user_signed_in? %>
+    <div class = "ex-button">
     <%= link_to "回答する", new_question_answer_path(@question.id) , class:"answer-button" %>
+      </div>
+    <% else %>
+    <% end %>
     <% end %>
 
     <% end %>
@@ -130,7 +46,7 @@ To: <%= Affilation.find(@question.affilation_id).name %> | 回答期限: <%= @qu
   <% @answers.each do |answer| %>
     <ul>
       <li><%= answer.answer %><br>
-      <%= User.find(answer.user_id).last_name %> <%= User.find(answer.user_id).first_name %>(<%= User.find(answer.user_id).inner_line%>)</li>
+      <%= Affilation.find(answer.user_id).name %> : <%= User.find(answer.user_id).last_name %> <%= User.find(answer.user_id).first_name %>(<%= User.find(answer.user_id).inner_line%>)</li>
     </ul>
   <% end %>
 <% else %>
@@ -138,5 +54,3 @@ To: <%= Affilation.find(@question.affilation_id).name %> | 回答期限: <%= @qu
 <% end %>
 </div>
 
-</body>
-</html>

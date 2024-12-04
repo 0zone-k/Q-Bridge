@@ -19,6 +19,7 @@ header h1 {
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
+  text-decoration: none; 
 }
 .button:hover {
   background-color: #0056b3;
@@ -30,7 +31,44 @@ header h1 {
 }
 
 .main-logo{
-  height: 150px;
+  height: 100px;
   width: 150px;
   margin: -15px;
+
+}
+.username{
+  background-color: white;
+  color: #004aab;
+  border: 1px solid #0056b3;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  text-decoration: none;
+
+}
+
+.news{
+  position: relative;
+  cursor: pointer;
+}
+
+.news span {
+  position: absolute;     /* 相対位置に指定 */
+  top: -15px;             /* 表示位置を上から-10pxの位置にする */
+  left: calc(100% - 10px);/* 表示位置を右から内側に10pxの位置 */
+  color: #FFF;            /* 文字色を白に指定 */
+  font-weight: bold;      /* 太文字にする */
+  line-height: 20px;      /* 行の高さを指定 */
+  text-align: center;     /* 文字を中央揃えにする */
+  background: #E68031;    /* 背景色をオレンジに指定 */
+  border-radius: 10px;    /* line-heightの半分の角丸を指定 */
+  min-width: 20px;        /* 最低幅を指定 */
+  padding: 0 3px;         /* 左右に少しだけ余白を設定 */
+  box-sizing: border-box; /* 計算しやすいように */
+}
+
+.right-btn{
+  display: flex;
 }

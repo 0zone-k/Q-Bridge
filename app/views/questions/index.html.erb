@@ -1,65 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>質問一覧 - Q-Bridge</title>
-  <style>
-      body {
-          font-family: 'Arial', sans-serif;
-          background-color: #e6f7ff;
-          color: #333;
-          margin: 0;
-          padding: 0;
-      }
-      .container {
-          max-width: 600px;
-          margin: 50px auto;
-          padding: 20px;
-          background-color: white;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          border-radius: 10px;
-      }
-      .question {
-          margin-bottom: 20px;
-          padding: 15px;
-          border: 1px solid #0056b3;
-          border-radius: 5px;
-          background-color: #f0f8ff;
-          transition: transform 0.3s;
-      }
-      .question:hover {
-          transform: scale(1.02);
-      }
-      h3 {
-          margin: 0;
-      }
-      .details {
-          font-size: 0.9em;
-          color: #666;
-      }
 
-      .fixed-button {
-          width: 100px;
-          height: 100px;
-          position: fixed;
-          bottom: 50px;
-          right: 50px;
-          background-color: #0056b3;
-          color: white;
-          border: none;
-          padding: 15px 20px;
-          border-radius: 50px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          cursor: pointer;
-          transition: background-color 0.3s;
-      }
-      .fixed-button:hover {
-          background-color: #004494;
-      }
-  </style>
-</head>
-<body>
 <%= render "shared/header" %>
 
 <div class="container">
@@ -69,7 +8,7 @@
   <%= link_to question_path(question) do %>
 <div class = "question">
   <h3><%= question.title %></h3>
-  <p class="details">To:<%= Affilation.find(question.affilation_id).name %> | 回答期限: <%= question.deadline %></p>
+  <p class="details">To:<%= Affilation.find(question.affilation_id).name %> | <%= Category.find(question.category_id).name %> | 回答期限: <%= question.deadline %></p>
   <p><%= question.content %></p>
   <%= User.find(question.user_id).last_name %> <%= User.find(question.user_id).first_name %>
   </div>
@@ -81,5 +20,3 @@
 <%= link_to  new_question_path, class: 'purchase-btn' do %>
 <button class="fixed-button">質問投稿</button>
 <% end %>
-</body>
-</html>
