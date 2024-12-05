@@ -1,4 +1,8 @@
+
 window.addEventListener('turbo:load', function() {
+
+  console.log('Alert file loaded');
+
   // 初期化
   let unreadCount = 0;
 

@@ -45,6 +45,12 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def search
+    @questions = Question.search(params[:keyword])
+    render :index
+  end
+
+
   private
   def question_params
     params.require(:question).permit(:title, :category_id, :content, :affilation_id, :deadline, :image).merge(user_id: current_user.id)

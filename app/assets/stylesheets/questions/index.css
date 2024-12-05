@@ -33,6 +33,7 @@ h3 {
     text-decoration: none; 
 }
 
+
 .fixed-button {
     width: 100px;
     height: 100px;
@@ -60,3 +61,37 @@ h3 {
   .title{
     text-decoration: none; 
   }
+  .search{
+    display:flex;
+    justify-content: center;
+  }
+
+  .search-container {
+    display:flex;
+    justify-content: center;
+    border: 2px solid #007BFF;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-top: 20px;
+    width: 600px;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    outline: none;
+    width: 300px;
+    font-size: 16px;
+}
+.search-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.search-button:hover {
+    background-color: #0056b3;
+}
