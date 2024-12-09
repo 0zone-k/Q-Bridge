@@ -13,9 +13,10 @@ RSpec.describe Question, type: :model do
         expect(@question).to be_valid
       end
       it '画像がなくても投稿できる' do
-        @question.image = ''
+        @question.image = nil
         expect(@question).to be_valid
     end
+  end
     context '投稿できない場合' do
       it 'titleが空では登録できない' do
         @question.title = ''
@@ -40,14 +41,13 @@ RSpec.describe Question, type: :model do
       it 'deadlineが空では登録できない' do
         @question.deadline = ''
         @question.valid?
-        expect(@question.errors.full_messages).to include "Daed line can't be blank"
+        expect(@question.errors.full_messages).to include "Deadline can't be blank"
       end
       it 'userが紐づいていないと登録できない' do
-        @item.user = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include 'User must exist'
+        @question.user = nil
+        @question.valid?
+        expect(@question.errors.full_messages).to include 'User must exist'
       end
     end
   end
-end
 end
