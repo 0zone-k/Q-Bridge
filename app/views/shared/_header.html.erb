@@ -11,7 +11,7 @@
       <span class="notice">3</span>
     </div>
     <div class = "logout">
-      <%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete} ,class: "button"%>
+      <%= link_to 'ログアウト', destroy_user_session_path, data: { method: :delete },class: "button"%>
     </div>
     </div>
       <% else %>

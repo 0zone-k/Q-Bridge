@@ -1,5 +1,4 @@
-
-window.addEventListener('turbo:load', function() {
+window.addEventListener('load', function() {
 
   console.log('Alert file loaded');
 

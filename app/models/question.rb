@@ -8,9 +8,9 @@ class Question < ApplicationRecord
   has_one_attached :image
 
   validates :title, presence: true
-  validates :category_id, presence: true,numericality: { other_than: 1, message: "can't be blank" }
+  validates :category_id, presence: true,numericality: { other_than: 1, message: "blank" }
   validates :content, presence: true
-  validates :affilation_id, presence: true,numericality: { other_than: 1, message: "can't be blank" }
+  validates :affilation_id, presence: true,numericality: { other_than: 1, message: "blank" }
   validates :deadline, presence: true
 
   def self.search(search)

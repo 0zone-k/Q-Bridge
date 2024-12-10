@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        last_name: 姓
+        first_name: 名
+        last_name_kana: 姓(カナ)
+        first_name_kana: 名(カナ)
+        inner_line: 内線番号
+        employee_num: 職員番号
+        affilation_id: 所属
+      question:
+        title: タイトル
+        category_id: カテゴリー
+        content: 質問内容
+        affilation_id: 所属
+        deadline: 回答期限
+  errors:
+    messages:
+        blank: を入力してください
+        invalid: が誤っています。全角で入力してください
+

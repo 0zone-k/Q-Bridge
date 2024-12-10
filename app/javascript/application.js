@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "alert"
+import { Turbo } from "@hotwired/turbo-rails";
