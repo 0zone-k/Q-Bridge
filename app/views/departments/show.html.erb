@@ -1,0 +1,14 @@
+<%= render "shared/header" %>
+
+<div class="container">
+  <h2>所属ページ</h2>
+  <p>所属: <span id="my-name"><%= Affilation.find(current_user.affilation_id).name %></span></p>
+  
+  <h3>所属宛の質問一覧</h3>
+  <% @questions.each do |question| %>
+    <ul>
+      <li><%= link_to question.title, question_path(question.id) %></li>
+    </ul>
+  <% end %>
+
+</div>

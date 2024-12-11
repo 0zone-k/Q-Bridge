@@ -17,7 +17,7 @@
   <%= link_to question_path(question) do %>
 <div class = "question">
   <h3><%= question.title %></h3>
-  <p class="details">To:<%= Affilation.find(question.affilation_id).name %> | <%= Category.find(question.category_id).name %> | 回答期限: <%= question.deadline %></p>
+  <p class="details">To:<%= Department.find(question.department_id).department %> | <%= Category.find(question.category_id).name %> | 回答期限: <%= question.deadline %></p>
   <p><%= question.content %></p>
   <%= User.find(question.user_id).last_name %> <%= User.find(question.user_id).first_name %>
   </div>

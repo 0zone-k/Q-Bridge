@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users ,only: :show
+  resources :departments ,only: [:show,:new, :create]
 
 
 end

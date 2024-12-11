@@ -35,8 +35,9 @@
   </div>
     <div class="form-group">
       <%= f.label :所属 %>
-  <%= f.collection_select(:affilation_id, Affilation.all, :id, :name, {}, {class:"affilaton-select"}) %>
+  <%= f.collection_select :department_id, Department.all, :id ,:department,{}, {class:"department-select"} %>
     </div>
+
   <div class="form-group">
       <%= f.label :メールアドレス %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: "メールアドレスを入力"%>
@@ -59,7 +60,3 @@
 </div>
 
 <% end %>
-
-
-</body>
-</html>

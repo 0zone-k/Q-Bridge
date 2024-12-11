@@ -3,9 +3,21 @@
 <div class = "image">
   <%= link_to image_tag("Bridge.png", class: 'main-logo'),"/" %>
 </div>
+ <% if user_signed_in? %>
+    <div class = "left-btn">
+      <div class= "department-new">
+        <%= link_to '部署作成', new_department_path ,class: "button"%>
+      </div>
+    </div>
+      <% end %>
           <div>
     <% if user_signed_in? %>
-    <div class = "right-btn">
+
+    </div>
+        <div class = "right-btn">
+      <div class = "department">
+        <%= link_to Department.find(current_user.department_id).department ,"/departments/#{current_user.id}",class: "button"%>
+      </div>
     <div class = "news">
       <%= link_to current_user.last_name + ' ' + current_user.first_name ,"/users/#{current_user.id}",class: "button"%>
       <span class="notice">3</span>

@@ -8,7 +8,7 @@
   <p class="details">
     <p class="details">
 <%= User.find(@question.user_id).inner_line %> | <%= User.find(@question.user_id).last_name %> <%= User.find(@question.user_id).first_name %>
-　To: <%= Affilation.find(@question.affilation_id).name %> | 回答期限: <%= @question.deadline %></p>
+　To: <%= Department.find(@question.department_id).department %> | 回答期限: <%= @question.deadline %></p>
   
   <div class="content">
       <h3>質問内容</h3>

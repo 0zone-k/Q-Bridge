@@ -53,7 +53,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:title, :category_id, :content, :affilation_id, :deadline, :image).merge(user_id: current_user.id)
+    params.require(:question).permit(:title, :category_id, :content, :department_id, :deadline, :image).merge(user_id: current_user.id)
   end
 
   def set_question

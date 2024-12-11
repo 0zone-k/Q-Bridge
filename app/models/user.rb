@@ -19,13 +19,10 @@ class User < ApplicationRecord
          validates_format_of :password, with: PASSWORD_REGEX, message: 'is invalid. Include both letters and numbers'
          validates :inner_line, presence: true
          validates :employee_num, presence: true
-         validates :affilation_id, presence: true, numericality: { other_than: 1 , message: "blank"} 
 
-         extend ActiveHash::Associations::ActiveRecordExtensions
-         belongs_to :affilation
 
 
          has_many :questions
          has_many :answers
-
+         belongs_to :department
 end
