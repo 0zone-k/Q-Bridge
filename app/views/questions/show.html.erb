@@ -31,7 +31,7 @@ To: <%= Department.find(@question.department_id).department %> | 回答期限: <
    <%= link_to "削除する", question_path ,data: {turbo_method: :delete} , class:"answer-button" %>
   </div>
  <% else %>
-  <% if user_signed_in? %>
+  <% if user_signed_in? && current_user.department_id == @question.department_id %>
     <div class = "ex-button">
     <%= link_to "回答する", new_question_answer_path(@question.id) , class:"answer-button" %>
       </div>

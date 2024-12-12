@@ -3,7 +3,7 @@
 <div class = "image">
   <%= link_to image_tag("Bridge.png", class: 'main-logo'),"/" %>
 </div>
- <% if user_signed_in? %>
+ <% if user_signed_in? && current_user.department_id == 1%>
     <div class = "left-btn">
       <div class= "department-new">
         <%= link_to '部署作成', new_department_path ,class: "button"%>

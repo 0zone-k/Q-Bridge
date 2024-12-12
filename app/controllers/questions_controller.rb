@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_question, only: [:edit, :show, :update, :destroy]
   def index
-    @questions = Question.all
+    @questions = Question.includes(:user).order("created_at DESC")
   end
 
   def new

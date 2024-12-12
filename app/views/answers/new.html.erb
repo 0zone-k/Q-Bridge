@@ -2,7 +2,7 @@
 
 <div class="container">
   <h2>質問回答</h2>
-  <h3>該当の質問内容</h3>
+  <h3>該当の質問</h3>
   <div class="question">
   <h2><%= @question.title %></h2>
   <p class="details">
@@ -10,10 +10,10 @@
 <%= User.find(@question.user_id).inner_line %> | <%= User.find(@question.user_id).last_name %> <%= User.find(@question.user_id).first_name %>
 　To: <%= Department.find(@question.department_id).department %> | 回答期限: <%= @question.deadline %></p>
   
-  <div class="content">
+
       <h3>質問内容</h3>
       <p><%= @question.content %></p>
-  </div>
+
   </div>
   <% if @question.image.attached?%>
 <div class = "image-box-item">
