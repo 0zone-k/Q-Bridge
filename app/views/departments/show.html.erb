@@ -2,13 +2,15 @@
 
 <div class="container">
   <h2>所属ページ</h2>
-  <p>所属: <span id="my-name"><%= Affilation.find(current_user.affilation_id).name %></span></p>
+  <p>所属: <span id="my-name"><%= Department.find(current_user.department_id).department %></span></p>
   
   <h3>所属宛の質問一覧</h3>
+  <% if @questions.present? %>
   <% @questions.each do |question| %>
     <ul>
       <li><%= link_to question.title, question_path(question.id) %></li>
     </ul>
+  <% end %>
   <% end %>
 
 </div>

@@ -3,7 +3,7 @@
 <div class="container">
   <h2>マイページ</h2>
   <p>名前: <span id="my-name"><%= @user.last_name %> <%= @user.first_name %></span></p>
-  <p>所属: <span id="my-name"><%= Affilation.find(@user.affilation_id).name %></span></p>
+  <p>所属: <span id="my-name"><%= Department.find(@user.department_id).department %></span></p>
   <p>メールアドレス: <span id="my-email"><%= @user.email %></span></p>
   <p>内線番号: <span id="my-extension"><%= @user.inner_line %></span></p>
   

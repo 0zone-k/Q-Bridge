@@ -15,7 +15,8 @@ class DepartmentsController < ApplicationController
 
   def show
     @user = current_user
-    @questions = Question.all
+    @department = Department.find(params[:id])
+    @questions = @department.questions
   end
 end
 
